@@ -1,0 +1,25 @@
+group 'my.task'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+mainClassName = 'my.task.LocationGenerator'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+}
+jar {
+    baseName = 'LocationGenerator'
+    version =  '0.1.0'
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'my.task.LocationGenerator'
+        )
+    }
+}
